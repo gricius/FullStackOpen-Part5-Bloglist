@@ -47,3 +47,8 @@ NB You can implement the conditional rendering of the login form like this for e
   )
 }
 ```
+# 5.2: bloglist frontend, step2
+Make the login 'permanent' by using the local storage. Also, implement a way to log out.
+<img src='https://fullstackopen.com/static/fa111e6eccf20340b5258c12553d2ea6/5a190/6e.png'>
+
+Ensure the browser does not remember the details of the user after logging out.
