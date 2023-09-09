@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -17,6 +18,7 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     blogService
@@ -37,9 +39,17 @@ const App = () => {
     }
   }, [])
 
+  const showNotification = (message, type = 'success') => {
+    setNotification({ message, type })
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
+  }
+
   const addBlog = async (event) => {
     event.preventDefault()
-    const blogObject = {
+    try {
+      const blogObject = {
       title: newTitle,
       author: newAuthor,
       url: newUrl,
@@ -50,7 +60,12 @@ const App = () => {
     setNewTitle('')
     setNewAuthor('')
     setNewUrl('')
+    showNotification(`a new blog ${newTitle} by ${newAuthor} added`, 'success')
+    } catch (exception) {
+      showNotification('Error adding blog. Title, Authou and url are mandatory, ', 'error')
+    }
   }
+  
  
 
   const blogForm = () => (
@@ -85,12 +100,12 @@ const App = () => {
     try {
       // Clear the user data from local storage
       window.localStorage.removeItem('loggedBlogappUser')
-      // Reset the user state to null
+      showNotification('Logged out', 'success')
       setUser(null)
     } catch (exception) {
-      console.log('Error logging out', exception)
+      showNotification('Error logging out', 'error')
     }
-  }
+}
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -107,7 +122,10 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-    } catch (exception) {
+      showNotification('Logged in', 'success')
+      } catch (exception) {
+        showNotification('wrong credentials', 'error')
+        
       console.log('wrong credentials', exception)
     }
   }
@@ -116,6 +134,7 @@ const App = () => {
     return (
       <div>
         <h2>Log in to application</h2>
+        {notification && <Notification notification={notification} />}
         <form onSubmit={handleLogin}>
           <div>
             username
@@ -145,6 +164,9 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+
+      {notification && <Notification notification={notification} />}
+
         <p>
           {user.name} logged in 
           <button onClick={handleLogout}>Logout</button> 
