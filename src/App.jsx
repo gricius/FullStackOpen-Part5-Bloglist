@@ -1,3 +1,4 @@
+// App.jsx
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
@@ -10,27 +11,53 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
+    blogService
+    .getAll()
+    .then(blogs => {
       setBlogs( blogs )
-    )  
+  })  
   }, [])
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    console.log('loggedUserJSON', loggedUserJSON)
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      console.log('user', user)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
+  const handleLogout = async () => {
+    try {
+      // Clear the user data from local storage
+      window.localStorage.removeItem('loggedBlogappUser')
+      // Reset the user state to null
+      setUser(null)
+    } catch (exception) {
+      console.log('Error logging out', exception)
+    }
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log('loging in with', username, password)
-
     try {
       const user = await loginService.login({
         username, password,
       })
+
+      window.localStorage.setItem(
+        'loggedBlogappUser', JSON.stringify(user)
+      )
+
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
     } catch (exception) {
-      console.log('wrong credentials')
+      console.log('wrong credentials', exception)
     }
-
-      
   }
 
   if (user === null) {
@@ -66,10 +93,15 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <p>{user.name} logged in</p>
-      {blogs.map(blog =>
+      {user ? (
+        <p>
+          {user.name} logged in 
+          <button onClick={handleLogout}>Logout</button> 
+        </p>
+      ) : null}
+      {blogs.map(blog => (
         <Blog key={blog.id} blog={blog} />
-      )}
+      ))}
     </div>
   )
 }

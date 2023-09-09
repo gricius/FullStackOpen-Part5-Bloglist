@@ -1,3 +1,4 @@
+// ../FullStackOpen-Part5-bloglist-frontend/src/services/login.js
 import axios from 'axios'
 const baseUrl = '/api/login'
 
@@ -6,4 +7,10 @@ const login = async credentials => {
   return response.data
 }
 
-export default { login }
+// logout
+const logout = async () => {
+  const response = await axios.post('/api/logout')
+  return response.data
+}
+
+export default { login, logout }
