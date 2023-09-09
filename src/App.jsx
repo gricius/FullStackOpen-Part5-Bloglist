@@ -6,6 +6,14 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [newBlog, setNewBlog] = useState({
+    title: '',
+    author: '',
+    url: '',
+  })
+  const [newTitle, setNewTitle] = useState('')
+  const [newAuthor, setNewAuthor] = useState('')
+  const [newUrl, setNewUrl] = useState('')
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
@@ -28,6 +36,50 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
+
+  const addBlog = async (event) => {
+    event.preventDefault()
+    const blogObject = {
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl,
+    }
+
+    const returnedBlog = await blogService.create(blogObject)
+    setBlogs(blogs.concat(returnedBlog))
+    setNewTitle('')
+    setNewAuthor('')
+    setNewUrl('')
+  }
+ 
+
+  const blogForm = () => (
+    <form onSubmit={addBlog}>
+      <div>
+        title:
+        <input
+          value={newTitle}
+          onChange={(event) => setNewTitle(event.target.value)}
+        />
+      </div>
+      <div>
+        Author:
+        <input
+          value={newAuthor  }
+          onChange={(event) => setNewAuthor(event.target.value)}
+        />
+      </div>
+      <div>
+        url:
+        <input
+          value={newUrl}
+          onChange={(event) => setNewUrl(event.target.value)}
+        />
+      </div>
+      <button type="submit">save</button>
+    </form>
+  )          
+
 
   const handleLogout = async () => {
     try {
@@ -93,14 +145,14 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
-      {user ? (
         <p>
           {user.name} logged in 
           <button onClick={handleLogout}>Logout</button> 
         </p>
-      ) : null}
+      <h2>create new</h2>
+      {blogForm()}
       {blogs.map(blog => (
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} url={blog.url} />
       ))}
     </div>
   )

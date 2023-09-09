@@ -1,4 +1,4 @@
-// ../FullStackOpen-Part5-bloglist-frontend/src/services/login.js
+// ../services/login.js
 import axios from 'axios'
 const baseUrl = '/api/login'
 

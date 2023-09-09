@@ -52,3 +52,8 @@ Make the login 'permanent' by using the local storage. Also, implement a way to 
 <img src='https://fullstackopen.com/static/fa111e6eccf20340b5258c12553d2ea6/5a190/6e.png'>
 
 Ensure the browser does not remember the details of the user after logging out.
+
+# 5.3: bloglist frontend, step3
+Expand your application to allow a logged-in user to add new blogs:
+<img src='https://fullstackopen.com/static/b9f4cf7f481e4f1358be610031afe219/5a190/7e.png'>
+
