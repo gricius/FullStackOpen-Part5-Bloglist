@@ -37,15 +37,16 @@ const App = () => {
     }
   }, [])
 
-  const showNotification = (message, type = 'success') => {
+  const showNotification = (message, type) => {
     setNotification({ message, type })
+    console.log('notification type', type)
     setTimeout(() => {
       setNotification(null)
     }, 5000)
   }
+ 
 
   const addBlog = (blogObject) => {
-    try {
       blogFormRef.current.toggleVisibility()
       blogService
       .create(blogObject)
@@ -56,10 +57,12 @@ const App = () => {
         setNewUrl('')
         showNotification('Blog added by ' + user.name, 'success')
       })
-    } catch (exception) {
-      showNotification('Error adding blog', 'error')
-    }
+      .catch(exception => {
+        showNotification('Error: All fields are mandatory. Please retry', 'error')
+      })
   }
+      
+
   
    const blogForm = () => (
     <Togglable buttonLabel="new blog" ref={blogFormRef}>
@@ -68,15 +71,10 @@ const App = () => {
   )
 
 
-  const handleLogout = async () => {
-    try {
-      // Clear the user data from local storage
+  const handleLogout = () => {
       window.localStorage.removeItem('loggedBlogappUser')
       showNotification('Logged out', 'success')
       setUser(null)
-    } catch (exception) {
-      showNotification('Error logging out', 'error')
-    }
 }
 
   const handleLogin = async (event) => {
