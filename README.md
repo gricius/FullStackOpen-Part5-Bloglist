@@ -80,3 +80,8 @@ It expands when button create new blog is clicked
 <img src="https://fullstackopen.com/static/0cb27abc7b56ba5ecdd7e9d48d325c87/5a190/13be.png">
 
 The form closes when a new blog is created.
+
+# 5.6 Blog list frontend, step6
+Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component.
+
+The component must work like the NoteForm component from the material of this part.
