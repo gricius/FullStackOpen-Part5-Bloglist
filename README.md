@@ -130,3 +130,39 @@ We notice that something is wrong. When a new blog is created in the app, the na
 <img src="https://fullstackopen.com/static/4c1a13b22d33df750f24a6e136e7abc1/5a190/59new.png">
 
 When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
+
+# Blog list frontend, step9
+Implement the functionality for the like button. Likes are increased by making an HTTP PUT request to the unique address of the blog post in the backend.
+
+Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body. If you wanted to add a like to the following blog post:
+
+```jsx
+{
+  _id: "5a43fde2cbd20b12a2c34e91",
+  user: {
+    _id: "5a43e6b6c37f3d065eaaa581",
+    username: "mluukkai",
+    name: "Matti Luukkainen"
+  },
+  likes: 0,
+  author: "Joel Spolsky",
+  title: "The Joel Test: 12 Steps to Better Code",
+  url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
+},
+```
+
+You would have to make an HTTP PUT request to the address /api/blogs/5a43fde2cbd20b12a2c34e91 with the following request data:
+
+```jsx
+{
+  user: "5a43e6b6c37f3d065eaaa581",
+  likes: 1,
+  author: "Joel Spolsky",
+  title: "The Joel Test: 12 Steps to Better Code",
+  url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
+}
+```
+
+The backend has to be updated too to handle the user reference.
+
+One last warning: if you notice that you are using async/await and the then-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
