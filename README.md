@@ -124,3 +124,9 @@ const Blog = ({ blog }) => {
 
 NB: even though the functionality implemented in this part is almost identical to the functionality provided by the Togglable component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add a state to the blog post that controls the displayed form of the blog post.
 
+# 5.8: Blog list frontend, step8
+We notice that something is wrong. When a new blog is created in the app, the name of the user that added the blog is not shown in the details of the blog:
+
+<img src="https://fullstackopen.com/static/4c1a13b22d33df750f24a6e136e7abc1/5a190/59new.png">
+
+When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
