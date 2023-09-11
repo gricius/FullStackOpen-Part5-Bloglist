@@ -54,7 +54,7 @@ const App = () => {
         setNewTitle('')
         setNewAuthor('')
         setNewUrl('')
-        showNotification('Blog added by ' + user.username, 'success')
+        showNotification('Blog added by ' + user.name, 'success')
       })
     } catch (exception) {
       showNotification('Error adding blog', 'error')
