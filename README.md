@@ -166,3 +166,6 @@ You would have to make an HTTP PUT request to the address /api/blogs/5a43fde2cbd
 The backend has to be updated too to handle the user reference.
 
 One last warning: if you notice that you are using async/await and the then-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
+
+# 5.10: Blog list frontend, step10
+Modify the application to list the blog posts by the number of likes. Sorting the blog posts can be done with the array sort method.
