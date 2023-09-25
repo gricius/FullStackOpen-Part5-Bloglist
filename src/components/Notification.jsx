@@ -1,6 +1,6 @@
 // ./components/Notification.js
 const Notification = ({notification}) => {
-  const {message, type} = notification;
+  const {message, type} = notification
   const notificationStyle = {
       color: type === 'success' ? 'green' : 'red',
       background: 'lightgrey',
@@ -13,10 +13,10 @@ const Notification = ({notification}) => {
   };
 
   if (message === null) {
-      return null;
+      return null
   }
 
-  return <div style={notificationStyle}>{message}</div>;
+  return <div style={notificationStyle}>{message}</div>
 };
 
-export default Notification;
+export default Notification

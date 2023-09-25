@@ -86,7 +86,7 @@ Separate the form for creating a new blog into its own component (if you have no
 
 The component must work like the NoteForm component from the material of this part.
 
-# .7 Blog list frontend, step7
+# 5.7 Blog list frontend, step7
 Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.
 
 Full details of the blog open when the button is clicked.
@@ -131,7 +131,7 @@ We notice that something is wrong. When a new blog is created in the app, the na
 
 When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
 
-# Blog list frontend, step9
+# 5.9: Blog list frontend, step9
 Implement the functionality for the like button. Likes are increased by making an HTTP PUT request to the unique address of the blog post in the backend.
 
 Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body. If you wanted to add a like to the following blog post:
