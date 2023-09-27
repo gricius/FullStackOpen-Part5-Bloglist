@@ -1,4 +1,6 @@
 // ./components/Notification.js
+import React from 'react'
+
 const Notification = ({notification}) => {
   const {message, type} = notification
   const notificationStyle = {

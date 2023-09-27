@@ -1,34 +1,30 @@
 // ../components/BlogForm.jsx
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 const BlogForm = ({createBlog}) => { 
-  const [newTitle, setNewTitle] = useState('')
-  const [newAuthor, setNewAuthor] = useState('')
-  const [newUrl, setNewUrl] = useState('')
+  const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
 
   const addBlog = (event) => {
     event.preventDefault()
-    createBlog({
-      title: newTitle,
-      author: newAuthor,
-      url: newUrl,
-    })
-    setNewTitle('')
-    setNewAuthor('')
-    setNewUrl('')
+    createBlog(newBlog);
+    setNewBlog({ title: '', author: '', url: '' });
   }
+
+   
   
   return (
     <div>
-      <h2>create new</h2>
+      <h2>Create New Blog</h2>
       <form onSubmit={addBlog}>
         <div>
-          title:
+          Title:
           <input
             type="text"
             name="Title"
-            value={newTitle}
-            onChange={event => setNewTitle(event.target.value)}
+            value={newBlog.title}
+            onChange={(e) =>
+              setNewBlog({ ...newBlog, title: e.target.value })
+            }
           />
         </div>
         <div>
@@ -36,20 +32,22 @@ const BlogForm = ({createBlog}) => {
           <input
             type="text"
             name="Author"
-            value={newAuthor}
-            onChange={event => setNewAuthor(event.target.value)}
+            value={newBlog.author}
+            onChange={(e) =>
+              setNewBlog({ ...newBlog, author: e.target.value })
+            }
           />
         </div>
         <div>
-          url:
+          URL:
           <input
             type="text"
             name="Url"
-            value={newUrl}
-            onChange={event => setNewUrl(event.target.value)}
+            value={newBlog.url}
+            onChange={(e) => setNewBlog({ ...newBlog, url: e.target.value })}
           />
         </div>
-        <button type="submit">save</button>
+        <button type="submit">Save</button>
       </form>
     </div>
   )

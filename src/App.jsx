@@ -56,6 +56,7 @@ const App = () => {
         setNewAuthor('')
         setNewUrl('')
         showNotification('Blog added by ' + user.name, 'success')
+        console.log(returnedBlog)
       })
       .catch(exception => {
         showNotification('Error: All fields are mandatory. Please retry', 'error')
@@ -99,6 +100,11 @@ const App = () => {
       console.log('wrong credentials', exception)
     }
   }
+
+  const updateBlogs = (updatedBlogs) => {
+    setBlogs(updatedBlogs)
+  }
+
 
   if (user === null) {
     return (
@@ -146,7 +152,7 @@ const App = () => {
       {blogs
       .sort((a, b) => b.likes - a.likes)
       .map(blog => (
-        <Blog key={blog.id} blog={blog} url={blog.url}/>
+        <Blog key={blog.id} blog={blog} url={blog.url} user={user} updateBlogs={updateBlogs} />
       ))}
     </div>
   )
