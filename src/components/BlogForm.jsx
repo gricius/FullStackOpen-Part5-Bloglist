@@ -1,17 +1,17 @@
 // ../components/BlogForm.jsx
 import React, { useState } from 'react'
 
-const BlogForm = ({createBlog}) => { 
+const BlogForm = ({ createBlog }) => {
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
 
   const addBlog = (event) => {
     event.preventDefault()
-    createBlog(newBlog);
-    setNewBlog({ title: '', author: '', url: '' });
+    createBlog(newBlog)
+    setNewBlog({ title: '', author: '', url: '' })
   }
 
-   
-  
+
+
   return (
     <div>
       <h2>Create New Blog</h2>

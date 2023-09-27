@@ -11,10 +11,10 @@ const Blog = ({ blog, user, updateBlogs }) => {
   //console.log('likes state:', likes)
   const [notification, setNotification] = useState({ message: null, type: null })
 
-   const showNotification = (message, type) => {
+  const showNotification = (message, type) => {
     setNotification({ message, type })
-      setTimeout(() => {
-      setNotification({ message: null, type: null})
+    setTimeout(() => {
+      setNotification({ message: null, type: null })
     }, 5000)
   }
 
@@ -30,7 +30,7 @@ const Blog = ({ blog, user, updateBlogs }) => {
       })
       setLikes(updatedBlog.likes)
       showNotification('Blog liked', 'success')
-//      console.log('Likes updated:', updatedBlog.likes)
+      //      console.log('Likes updated:', updatedBlog.likes)
     } catch (error) {
       console.error('Error updating likes:', error)
       showNotification('Error updating likes', 'error')

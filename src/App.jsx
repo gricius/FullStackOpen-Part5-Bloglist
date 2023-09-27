@@ -9,8 +9,8 @@ import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('') 
-  const [password, setPassword] = useState('') 
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState(null)
   const blogFormRef = useRef()
@@ -20,10 +20,10 @@ const App = () => {
 
   useEffect(() => {
     blogService
-    .getAll()
-    .then(blogs => {
-      setBlogs( blogs )
-  })  
+      .getAll()
+      .then(blogs => {
+        setBlogs( blogs )
+      })
   }, [])
 
   useEffect(() => {
@@ -44,11 +44,11 @@ const App = () => {
       setNotification(null)
     }, 5000)
   }
- 
+
 
   const addBlog = (blogObject) => {
-      blogFormRef.current.toggleVisibility()
-      blogService
+    blogFormRef.current.toggleVisibility()
+    blogService
       .create(blogObject)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
@@ -62,10 +62,10 @@ const App = () => {
         showNotification('Error: All fields are mandatory. Please retry', 'error')
       })
   }
-      
 
-  
-   const blogForm = () => (
+
+
+  const blogForm = () => (
     <Togglable buttonLabel="new blog" ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
     </Togglable>
@@ -73,10 +73,10 @@ const App = () => {
 
 
   const handleLogout = () => {
-      window.localStorage.removeItem('loggedBlogappUser')
-      showNotification('Logged out', 'success')
-      setUser(null)
-}
+    window.localStorage.removeItem('loggedBlogappUser')
+    showNotification('Logged out', 'success')
+    setUser(null)
+  }
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -94,9 +94,9 @@ const App = () => {
       setUsername('')
       setPassword('')
       showNotification('Logged in', 'success')
-      } catch (exception) {
-        showNotification('wrong credentials', 'error')
-        
+    } catch (exception) {
+      showNotification('wrong credentials', 'error')
+
       console.log('wrong credentials', exception)
     }
   }
@@ -143,17 +143,17 @@ const App = () => {
 
       {notification && <Notification notification={notification} />}
 
-        <p>
-          {user.name} logged in 
-          <button onClick={handleLogout}>Logout</button> 
-        </p>
+      <p>
+        {user.name} logged in
+        <button onClick={handleLogout}>Logout</button>
+      </p>
       <h2>create new</h2>
       {blogForm()}
       {blogs
-      .sort((a, b) => b.likes - a.likes)
-      .map(blog => (
-        <Blog key={blog.id} blog={blog} url={blog.url} user={user} updateBlogs={updateBlogs} />
-      ))}
+        .sort((a, b) => b.likes - a.likes)
+        .map(blog => (
+          <Blog key={blog.id} blog={blog} url={blog.url} user={user} updateBlogs={updateBlogs} />
+        ))}
     </div>
   )
 }
