@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
@@ -36,5 +36,15 @@ describe('Blog Component', () => {
     expect(urlElement).not.toBeInTheDocument()
     expect(likesElement).not.toBeInTheDocument()
   })
+  // test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked.
+  test('shows URL and likes when the "Show details" button is clicked', () => {
+    const showDetailsButton = screen.getByText('Show details')
+    fireEvent.click(showDetailsButton)
 
+    const urlElement = screen.getByText('http://example.com')
+    const likesElement = screen.getByText('10')
+
+    expect(urlElement).toBeInTheDocument()
+    expect(likesElement).toBeInTheDocument()
+  })
 })
