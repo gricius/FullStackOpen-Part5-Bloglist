@@ -4,11 +4,11 @@ import blogService from '../services/blogs'
 import Notification from './Notification'
 
 const Blog = ({ blog, user, updateBlogs }) => {
-  console.log('user id', user.id)
-  console.log('blog user Id', blog.user.id)
+  //console.log('user id', user.id)
+  //console.log('blog user Id', blog.user.id)
   const [showDetails, setShowDetails] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
-  //console.log('likes state:', likes)
+  console.log('likes state:', likes)
   const [notification, setNotification] = useState({ message: null, type: null })
 
   const showNotification = (message, type) => {
@@ -30,7 +30,8 @@ const Blog = ({ blog, user, updateBlogs }) => {
       })
       setLikes(updatedBlog.likes)
       showNotification('Blog liked', 'success')
-      //      console.log('Likes updated:', updatedBlog.likes)
+      console.log('handleLike function called')
+      console.log('Likes updated:', updatedBlog.likes)
     } catch (error) {
       console.error('Error updating likes:', error)
       showNotification('Error updating likes', 'error')
@@ -71,10 +72,10 @@ const Blog = ({ blog, user, updateBlogs }) => {
       <Notification notification={notification} />
       {showDetails && (
         <div>
-          <div>{blog.url}</div>
+          <div>Blog URL: {blog.url}</div>
           <div>
-            {likes}{' '}
-            <button onClick={handleLike}>Like</button>
+            Likes: {likes}
+            {' '}<button onClick={handleLike}>Like</button>
           </div>
           {(user.id === blog.user.id || user.id === blog.user) && (
             <button onClick={handleDelete}>Remove</button>
