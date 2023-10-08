@@ -147,7 +147,6 @@ const App = () => {
         {user.name} logged in
         <button onClick={handleLogout}>Logout</button>
       </p>
-      <h2>create new</h2>
       {blogForm()}
       {blogs
         .sort((a, b) => b.likes - a.likes)

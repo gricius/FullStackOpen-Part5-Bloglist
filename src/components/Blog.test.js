@@ -71,4 +71,5 @@ describe('Blog Component', () => {
       expect(updateBlogs).toHaveBeenCalledTimes(0)
     })
   })
-})
+}
+)
