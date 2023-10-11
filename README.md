@@ -199,3 +199,22 @@ Make a test, which ensures that if the like button is clicked twice, the event h
 
 # 5.16: Blog list tests, step4
 Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
+
+# 5.17: bloglist end to end testing, step1
+Configure Cypress for your project. Make a test for checking that the application displays the login form by default.
+
+The structure of the test must be as follows:
+``` cypress
+describe('Blog app', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:3003/api/testing/reset')
+    cy.visit('http://localhost:5173')
+  })
+
+  it('Login form is shown', function() {
+    // ...
+  })
+})
+```
+
+The beforeEach formatting blog must empty the database using for example the method we used in the <a href="https://fullstackopen.com/en/part5/end_to_end_testing#controlling-the-state-of-the-database">material.</a>
