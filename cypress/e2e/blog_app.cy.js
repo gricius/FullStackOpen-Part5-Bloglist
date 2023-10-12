@@ -10,7 +10,7 @@ describe('Blog app', function() {
     cy.contains('password')
   })
 
-  // Make tests for logging in. Test both successful and unsuccessful login attempts. 
+  // Make tests for logging in. Test both successful and unsuccessful login attempts.
   // Make a new user in the beforeEach block for the tests.
   // Check that the notification shown with unsuccessful login is displayed red.
   describe('Login',function() {
@@ -39,6 +39,22 @@ describe('Blog app', function() {
 
       cy.get('.error').should('contain', 'wrong credentials').should('have.css', 'color', 'rgb(255, 0, 0)')
     })
-  }
-  )
+
+    // Make a test which checks that a logged in user can create a new blog.
+    describe('When logged in', function() {
+      beforeEach(function() {
+        cy.login({ username: 'blogtest', password: 'blogpassword' })
+      })
+
+      it('A blog can be created', function() {
+        cy.contains('new blog').click()
+        cy.get('.title').type('test title')
+        cy.get('.author').type('test author')
+        cy.get('.url').type('test url')
+        cy.get('.create-button').click()
+
+        cy.contains('test title')
+      })
+    })
+  })
 })
