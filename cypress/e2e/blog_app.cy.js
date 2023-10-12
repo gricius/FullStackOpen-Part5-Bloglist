@@ -67,6 +67,20 @@ describe('Blog app', function() {
         cy.contains('Like').click()
         cy.contains('Likes: 1 ')
       })
+
+      // Make a test for ensuring that the user who created a blog can delete it.
+      it('A blog can be deleted by a user who created the blog', function() {
+        cy.contains('new blog').click()
+        cy.get('.title').type('test title')
+        cy.get('.author').type('test author')
+        cy.get('.url').type('test url')
+        cy.get('.create-button').click()
+        cy.contains('Show details').click()
+        cy.contains('Remove').click()
+        cy.get('html').should('not.contain', 'test title')
+      })
+
+
     })
   })
 })
