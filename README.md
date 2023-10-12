@@ -218,3 +218,36 @@ describe('Blog app', function() {
 ```
 
 The beforeEach formatting blog must empty the database using for example the method we used in the <a href="https://fullstackopen.com/en/part5/end_to_end_testing#controlling-the-state-of-the-database">material.</a>
+
+# 5.18: bloglist end to end testing, step2
+Make tests for logging in. Test both successful and unsuccessful login attempts. Make a new user in the beforeEach block for the tests.
+
+The test structure extends like so:
+
+```jsx
+
+describe('Blog app', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:3003/api/testing/reset')
+    // create here a user to backend
+    cy.visit('http://localhost:5173')
+  })
+
+  it('Login form is shown', function() {
+    // ...
+  })
+
+  describe('Login',function() {
+    it('succeeds with correct credentials', function() {
+      // ...
+    })
+
+    it('fails with wrong credentials', function() {
+      // ...
+    })
+  })
+})
+
+```
+
+Optional bonus exercise: Check that the notification shown with unsuccessful login is displayed red.
