@@ -18,7 +18,7 @@ const Notification = ({ notification }) => {
     return null
   }
 
-  return <div style={notificationStyle}>{message}</div>
+  return <div className="error" style={notificationStyle}>{message}</div>
 }
 
 export default Notification
