@@ -55,6 +55,18 @@ describe('Blog app', function() {
 
         cy.contains('test title')
       })
+
+      // Make a test which checks that a logged in user can like a blog.
+      it('A blog can be liked', function() {
+        cy.contains('new blog').click()
+        cy.get('.title').type('test title')
+        cy.get('.author').type('test author')
+        cy.get('.url').type('test url')
+        cy.get('.create-button').click()
+        cy.contains('Show details').click()
+        cy.contains('Like').click()
+        cy.contains('Likes: 1 ')
+      })
     })
   })
 })

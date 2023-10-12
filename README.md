@@ -274,3 +274,8 @@ describe('Blog app', function() {
 ```
 
 The test has to ensure that a new blog is added to the list of all blogs.
+
+# 5.20: bloglist end to end testing, step4
+
+Make a test that confirms users can like a blog.
+
