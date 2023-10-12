@@ -276,9 +276,10 @@ describe('Blog app', function() {
 The test has to ensure that a new blog is added to the list of all blogs.
 
 # 5.20: bloglist end to end testing, step4
-
 Make a test that confirms users can like a blog.
 
 # 5.21: bloglist end to end testing, step5
 Make a test for ensuring that the user who created a blog can delete it.
 
+# 5.22: bloglist end to end testing, step6
+Make a test for ensuring that only the creator can see the delete button of a blog, not anyone else.

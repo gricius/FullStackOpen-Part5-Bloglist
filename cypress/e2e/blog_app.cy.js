@@ -80,7 +80,23 @@ describe('Blog app', function() {
         cy.get('html').should('not.contain', 'test title')
       })
 
-
+      // Make a test that ensures that users cannot delete blogs created by other users.
+      it('A blog cannot be deleted by a user who did not create the blog', function() {
+        cy.contains('new blog').click()
+        cy.get('.title').type('test title')
+        cy.get('.author').type('test author')
+        cy.get('.url').type('test url')
+        cy.get('.create-button').click()
+        cy.contains('Logout').click()
+        cy.request('POST', 'http://localhost:3003/api/users', {
+          username: 'blogtest2',
+          name: 'Test User 2',
+          password: 'blogpassword2'
+        })
+        cy.login({ username: 'blogtest2', password: 'blogpassword2' })
+        cy.contains('Show details').click()
+        cy.get('html').should('not.contain', 'Remove')
+      })
     })
   })
 })
