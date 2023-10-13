@@ -30,6 +30,9 @@ const Blog = ({ blog, user, updateBlogs }) => {
       })
       setLikes(updatedBlog.likes)
       showNotification('Blog liked', 'success')
+      updateBlogs((prevBlogs) =>
+        prevBlogs.map((b) => (b.id === updatedBlog.id ? updatedBlog : b))
+      )
       console.log('handleLike function called')
       console.log('Likes updated:', updatedBlog.likes)
     } catch (error) {
@@ -61,21 +64,21 @@ const Blog = ({ blog, user, updateBlogs }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div className='blog' style={blogStyle}>
       <div className='shortList'>
         <div>Title: {blog.title}</div>
         <div>Author: {blog.author}</div>
-        <button onClick={toggleDetails}>
+        <button className='show-details-btn' onClick={toggleDetails}>
           {showDetails ? 'Hide details' : 'Show details'}
         </button>
       </div>
       <Notification notification={notification} />
       {showDetails && (
-        <div>
+        <div className='details'>
           <div>Blog URL: {blog.url}</div>
           <div>
             Likes: {likes}
-            {' '}<button onClick={handleLike}>Like</button>
+            {' '}<button className='like-button' onClick={handleLike}>Like</button>
           </div>
           {(user.id === blog.user.id || user.id === blog.user) && (
             <button onClick={handleDelete}>Remove</button>
